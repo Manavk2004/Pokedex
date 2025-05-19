@@ -25,7 +25,6 @@ func (c *Client) GetLocation(locationName string) (Location, error){
 	if err != nil{
 		return Location{}, err
 	}
-	fmt.Println("Final URL:", url)
 	resp, err := c.httpClient.Do(req)
 	if err != nil{
 		return Location{}, err
@@ -37,11 +36,9 @@ func (c *Client) GetLocation(locationName string) (Location, error){
 	}
 
 	res, err := io.ReadAll(resp.Body)
-	fmt.Println("Hello4")
 	if err != nil{
 		return Location{}, err
 	}
-	fmt.Printf("Response Body: %s", string(res))
 
 	locationResp := Location{}
 	err = json.Unmarshal(res, &locationResp)
